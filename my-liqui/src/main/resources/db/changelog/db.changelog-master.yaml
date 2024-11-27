@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: moldo
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/iaka.sql
+            splitStatements: true
+            stripComments: true
+  - changeSet:
+      id: 2
+      author: moldo
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/iaka-2.sql
+            splitStatements: true
+            stripComments: true
