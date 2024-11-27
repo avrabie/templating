@@ -59,6 +59,7 @@ liquibase {
             username 'admin'                                   // Database username
             password 'admin123'                                   // Database password
             driver 'org.postgresql.Driver'                                // Database driver
+
         }
     }
     runList = 'main'
