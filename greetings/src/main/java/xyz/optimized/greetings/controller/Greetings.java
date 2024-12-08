@@ -1,5 +1,6 @@
 package xyz.optimized.greetings.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
@@ -16,6 +17,9 @@ public class Greetings {
     private final TutorialRepo tutorialRepo;
     private final MyEmitter myEmitter;
 
+    @Value("${my.greeting}")
+    private String greeting;
+
     public Greetings(TutorialRepo tutorialRepo, MyEmitter myEmitter) {
         this.tutorialRepo = tutorialRepo;
         this.myEmitter = myEmitter;
@@ -23,8 +27,8 @@ public class Greetings {
 
     @GetMapping("/greetings")
     public Flux<String> greetings() {
-        return Flux.just("Hello World!", " by Optimized", " from Spring Boot")
-                .delayElements(java.time.Duration.ofSeconds(1));
+        return Flux.just("Hello World!", " by Optimized", " from Spring Boot ", greeting)
+                .delayElements(java.time.Duration.ofMillis(300));
     }
 
     @GetMapping("add/tutorial")
