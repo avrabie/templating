@@ -11,6 +11,7 @@
 run in a new terminal `cloud-provider-kind`, this allows to create serivces of type LoadBalancer
 
 `kind create cluster --name demo` 
+`kind delete cluster --name=demo`
 
 ### Apply your deployments
 `kubectl apply -f deployment.yaml`
