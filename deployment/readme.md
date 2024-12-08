@@ -8,7 +8,7 @@
 ## Instructions:
 
 ### Create Cluster
-run in a new terminal `cloud-provider-kind`, this allows to create serivces of type LoadBalancer
+run in a new terminal `cloud-provider-kind`, this allows to create services of type LoadBalancer
 
 `kind create cluster --name demo` 
 `kind delete cluster --name=demo`

@@ -15,3 +15,11 @@ databaseChangeLog:
             path: classpath:/db/changelog/iaka-2.sql
             splitStatements: true
             stripComments: true
+  - changeSet:
+      id: 3
+      author: moldo
+      changes:
+        - sqlFile:
+            path: classpath:/db/changelog/dump/data.sql
+            splitStatements: true
+            stripComments: true
