@@ -14,20 +14,23 @@ run in a new terminal `cloud-provider-kind`, this allows to create serivces of t
 `kind delete cluster --name=demo`
 
 ### Apply your deployments
-`kubectl apply -f deployment.yaml`
+`kubectl apply -f greetings-deployment.yaml`
 
-`kubectl apply -f service.yaml`
+`kubectl apply -f greetings-service.yaml`
 
 ### Apply persistent sets
 `kubectl get storageclass`
 make sure it's `standard` or `default` and  then apply the persistent volume to persisten- volume.yaml
 
+` kubectl get pv `
+` kubectl apply -f postgres-pv.yaml`
+` kubectl apply -f postgres-pvc.yaml `
+` kubectl apply -f postgres-config-map.yaml `
+` kubectl apply -f postgres-deployment.yaml `
+` kubectl apply -f postgres-service.yaml`
 
-`kubectl apply -f persistent-volume.yaml`
-`kubectl apply -f postgres-config-map.yaml `
-`kubectl apply -f postgres-pvc.yaml `
-`kubectl apply -f postgres-deployment.yaml `
-`kubectl apply -f postgres-service.yaml`
+Check the postgres is running.
+`kubectl apply -f liqui-deployment.yaml`
 
 You can then enter inside the pod:
 `kubectl exec -it postgres-0 bash`

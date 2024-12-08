@@ -9,3 +9,5 @@
 `./gradlew clean build`
 
 `./gradlew bootBuildImage --imageName moldovean/greetings`
+
+` docker push moldovean/greetings`

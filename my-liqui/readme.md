@@ -18,3 +18,7 @@ Make a dump of the DB
 
 #### Copy the file from k8s to your local machine
 * `kubectl cp postgres-0:/data.sql ./data.sql`
+
+`./gradlew clean build`
+`./gradlew bootBuildImage --imageName moldovean/greetings-liquibase`
+`docker push moldovean/greetings-liquibase`
