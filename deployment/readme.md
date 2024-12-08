@@ -29,8 +29,10 @@ make sure it's `standard` or `default` and  then apply the persistent volume to 
 ` kubectl apply -f postgres-deployment.yaml `
 ` kubectl apply -f postgres-service.yaml  `
 
-Check the postgres is running.
+Check the postgres is running, only if the postgres is running then run this
 `kubectl apply -f liqui-deployment.yaml`
+Then wait until the pod is in state: COMPLETED
+
 
 You can then enter inside the pod:
 `kubectl exec -it postgres-0 bash`
