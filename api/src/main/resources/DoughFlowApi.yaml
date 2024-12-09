@@ -1,0 +1,254 @@
+openapi: 3.0.2
+info:
+  title: DoughFlowApi
+  version: 1.0.0
+  description: >-
+    Welcome to DoughFlowAPI!
+    
+    The backend that kneads to succeed, delivering piping hot plăcinte directly from the cloud to your
+    customers' hearts (and stomachs). Whether you're flipping crusts or filling orders, DoughFlowAPI
+    ensures your dough always rises to the occasion. It's flaky on the outside, robust on the inside, and
+    always in sync with your hunger for success.
+    
+    
+    Features:
+    
+    
+    Perfectly baked endpoints, no soggy middle!
+    
+    Scalability as endless as grandma's secret recipes.
+    
+    Secure transactions, so nobody takes a bite out of your profits.
+    
+    With DoughFlowAPI, you'll roll out features faster than you can say "golden crust!" Let’s get that
+    dough flowing! 🥧
+  contact:
+    email: admin@placinte.xyz
+servers:
+  -
+    url: http://localhost:8080/api
+    description: ''
+paths:
+  /placintas:
+    summary: Path used to manage the list of placintas.
+    description: >-
+      The REST endpoint/path used to list and create zero or more `placinta` entities.  This path
+      contains a `GET` and `POST` operation to perform the list and create tasks, respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/placinta'
+          description: Successful response - returns an array of `placinta` entities.
+      operationId: getplacintas
+      summary: List All placintas
+      description: Gets a list of all `placinta` entities.
+    post:
+      requestBody:
+        description: A new `placinta` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/placinta'
+        required: true
+      responses:
+        '201':
+          description: Successful response.
+      operationId: createplacinta
+      summary: Create a placinta
+      description: Creates a new instance of a `placinta`.
+  /placintas/{placintaId}:
+    summary: Path used to manage a single placinta.
+    description: >-
+      The REST endpoint/path used to get, update, and delete single instances of an `placinta`.  This
+      path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete
+      tasks, respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/placinta'
+          description: Successful response - returns a single `placinta`.
+      operationId: getplacinta
+      summary: Get a placinta
+      description: Gets the details of a single instance of a `placinta`.
+    put:
+      requestBody:
+        description: Updated `placinta` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/placinta'
+        required: true
+      responses:
+        '202':
+          description: Successful response.
+      operationId: updateplacinta
+      summary: Update a placinta
+      description: Updates an existing `placinta`.
+    delete:
+      responses:
+        '204':
+          description: Successful response.
+      operationId: deleteplacinta
+      summary: Delete a placinta
+      description: Deletes an existing `placinta`.
+    parameters:
+      -
+        name: placintaId
+        description: A unique identifier for a `placinta`.
+        schema:
+          type: string
+        in: path
+        required: true
+  /orders:
+    summary: Path used to manage the list of orders.
+    description: >-
+      The REST endpoint/path used to list and create zero or more `order` entities.  This path contains
+      a `GET` and `POST` operation to perform the list and create tasks, respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/order'
+          description: Successful response - returns an array of `order` entities.
+      operationId: getorders
+      summary: List All orders
+      description: Gets a list of all `order` entities.
+    post:
+      requestBody:
+        description: A new `order` to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+        required: true
+      responses:
+        '201':
+          description: Successful response.
+      operationId: createorder
+      summary: Create a order
+      description: Creates a new instance of a `order`.
+  /orders/{orderId}:
+    summary: Path used to manage a single order.
+    description: >-
+      The REST endpoint/path used to get, update, and delete single instances of an `order`.  This path
+      contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks,
+      respectively.
+    get:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/order'
+          description: Successful response - returns a single `order`.
+      operationId: getorder
+      summary: Get a order
+      description: Gets the details of a single instance of a `order`.
+    put:
+      requestBody:
+        description: Updated `order` information.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/order'
+        required: true
+      responses:
+        '202':
+          description: Successful response.
+      operationId: updateorder
+      summary: Update a order
+      description: Updates an existing `order`.
+    delete:
+      responses:
+        '204':
+          description: Successful response.
+      operationId: deleteorder
+      summary: Delete a order
+      description: Deletes an existing `order`.
+    parameters:
+      -
+        name: orderId
+        description: A unique identifier for a `order`.
+        schema:
+          type: string
+        in: path
+        required: true
+components:
+  schemas:
+    placinta:
+      title: Root Type for placinta
+      description: Placinta Object
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          format: double
+          type: number
+        ingredients:
+          type: array
+          items:
+            type: string
+      example:
+        id: '12345'
+        name: Cheese and Dill Plăcintă
+        description: >-
+          A traditional Moldovan plăcintă filled with a delicious mixture of creamy cheese and fresh
+          dill.
+        price: 5.99
+        ingredients:
+          - Flour
+          - Water
+          - Salt
+          - Cheese
+          - Dill
+          - Egg
+    order:
+      title: Root Type for order
+      description: An order made by a customer
+      type: object
+      properties:
+        id:
+          type: string
+        customerName:
+          type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              placintaId:
+                type: string
+              quantity:
+                format: int32
+                type: integer
+        totalPrice:
+          format: double
+          type: number
+      example:
+        id: '67890'
+        customerName: Ion Popescu
+        items:
+          -
+            placintaId: '12345'
+            quantity: 2
+          -
+            placintaId: '67891'
+            quantity: 1
+        totalPrice: 17.97
