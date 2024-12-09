@@ -1,4 +1,4 @@
 rootProject.name = 'templating'
-include("greetings")
+include 'greetings'
 include 'api'
 

@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'org.openapi.generator' version "7.7.0"
 }
 
 group = 'xyz.optimized'
@@ -16,4 +17,37 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+openApiGenerate {
+    generatorName.set("spring")
+    inputSpec.set("$rootDir/src/main/resources/DoughFlowApi.yaml")
+    outputDir.set("$rootDir/src/main/gen")
+    apiPackage.set("xyz.optimized.api")
+//    invokerPackage.set("com.example.apifirstgradle1.invoker")
+    modelPackage.set("xyz.optimized.model")
+    configOptions.set([
+            dateLibrary   : "java17",
+            interfaceOnly : "true",
+            useSpringBoot3: "true",
+            reactive      : "true",
+            hateoas       : "false",
+            useBeanValidation: "false",
+            additionalModelTypeAnnotations: "false"
+
+    ])
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java", "src/main/gen/src/main/java"]
+        }
+    }
+}
+
+tasks.register("deleteGeneratedSources") {
+    doFirst {
+        delete "$rootDir/api/src/main/gen"
+    }
 }
