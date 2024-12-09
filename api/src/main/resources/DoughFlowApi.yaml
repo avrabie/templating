@@ -27,7 +27,7 @@ info:
 servers:
   -
     url: http://localhost:8080/api
-    description: ''
+    description: 'Localhost Server'
 paths:
   /placintas:
     summary: Path used to manage the list of placintas.
