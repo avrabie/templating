@@ -1,0 +1,168 @@
+openapi: 3.0.0
+info:
+  title: DoughFlowAPI
+  description: |
+    The API that powers your delicious plăcinte empire! Manage orders, customers, and your menu with ease.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost/v1
+    description: Localhost server
+  - url: https://api.doughflow.com/v1
+    description: Production server
+  - url: https://staging.api.doughflow.com/v1
+    description: Staging server
+
+paths:
+  /placinte:
+    get:
+      summary: Get all plăcinte
+      description: Retrieve a list of all available plăcinte on the menu.
+      responses:
+        '200':
+          description: A list of plăcinte.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Placinta'
+    post:
+      summary: Add a new plăcintă
+      description: Add a new type of plăcintă to the menu.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Placinta'
+      responses:
+        '201':
+          description: Plăcintă created successfully.
+  /placinte/{id}:
+    get:
+      summary: Get a specific plăcintă
+      description: Retrieve details about a specific plăcintă by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the plăcintă to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of the specified plăcintă.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Placinta'
+        '404':
+          description: Plăcintă not found.
+    put:
+      summary: Update a plăcintă
+      description: Update the details of a specific plăcintă by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the plăcintă to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Placinta'
+      responses:
+        '200':
+          description: Plăcintă updated successfully.
+    delete:
+      summary: Delete a plăcintă
+      description: Remove a plăcintă from the menu by ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The ID of the plăcintă to delete.
+      responses:
+        '204':
+          description: Plăcintă deleted successfully.
+
+  /orders:
+    get:
+      summary: Get all orders
+      description: Retrieve a list of all customer orders.
+      responses:
+        '200':
+          description: A list of orders.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+    post:
+      summary: Create a new order
+      description: Place a new customer order for plăcinte.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+      responses:
+        '201':
+          description: Order created successfully.
+
+components:
+  schemas:
+    Placinta:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the plăcintă.
+        name:
+          type: string
+          description: The name of the plăcintă.
+        description:
+          type: string
+          description: A description of the plăcintă.
+        price:
+          type: number
+          format: float
+          description: The price of the plăcintă.
+        ingredients:
+          type: array
+          items:
+            type: string
+          description: List of ingredients.
+
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the order.
+        customerName:
+          type: string
+          description: The name of the customer.
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              placintaId:
+                type: string
+                description: The ID of the plăcintă.
+              quantity:
+                type: integer
+                description: Number of units ordered.
+        totalPrice:
+          type: number
+          format: float
+          description: Total price of the order.
